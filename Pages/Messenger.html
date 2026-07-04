@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MiniCord</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../sidebar.css">
+</head>
+<body id="Messenger">
+
+<h1 style = "margin-left: 10px;">MiniCord</h1>
+<div id="messages"></div>
+
+<button id="side_btn">&lt;</button>
+
+<form id="messageForm" autocomplete="off">
+  <input type="text" id="messageField" placeholder="Enter your message" required />
+  <button type="submit">Send</button>
+</form>
+
+<script src="../Scripts/main.js"></script>
+<script src="../Scripts/sidebar.js"></script>
+
+<nav class="sidebar">
+  <button id = "servers">Servers</button>
+  <button id = "settings">Settings</button>
+  <input type="file" id="themeUpload" accept=".css,text/css">
+  <button id="resetTheme">Reset Theme</button>
+</nav>
+
+<script>
+  const themeUpload = document.getElementById("themeUpload");
+
+// Load saved theme on startup
+const savedTheme = localStorage.getItem("customTheme");
+
+if (savedTheme) {
+    const style = document.createElement("style");
+    style.id = "customTheme";
+    style.textContent = savedTheme;
+    document.head.appendChild(style);
+}
+
+themeUpload.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    // Ensure file is actually a CSS file
+    const isCSS =
+        file.name.toLowerCase().endsWith(".css") ||
+        file.type === "text/css";
+
+    if (!isCSS) {
+        alert("Only CSS theme files are allowed.");
+        themeUpload.value = "";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const css = e.target.result;
+
+        let style =
+            document.getElementById("customTheme");
+
+        if (!style) {
+            style = document.createElement("style");
+            style.id = "customTheme";
+            document.head.appendChild(style);
+        }
+
+        style.textContent = css;
+
+        localStorage.setItem(
+            "customTheme",
+            css
+        );
+
+        alert("Theme applied!");
+    };
+
+    reader.readAsText(file);
+});
+
+document.getElementById("resetTheme")
+.addEventListener("click", () => {
+    localStorage.removeItem("customTheme");
+
+    const style =
+        document.getElementById(
+            "customTheme"
+        );
+
+    if (style) {
+        style.remove();
+    }
+
+    location.reload();
+});
+</script>
+</body>
+</html>

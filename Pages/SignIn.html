@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Mincord</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<!-- Google Identity Services -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body id="pages" style="align-items:center;">
+
+<h1>Sign In</h1>
+
+<div id="g_id_onload"
+     data-client_id="154358953102-upkrv30hl4gt6vngcrq9ihj0jjfc6okf.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse"
+     data-auto_prompt="false">
+</div>
+
+<div class="g_id_signin"
+     data-type="standard"
+     data-size="large"
+     data-theme="outline"
+     data-text="signin_with"
+     data-shape="pill"
+     data-logo_alignment="left">
+</div>
+
+<div id="loadingScreen" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background: #252525;
+    color:white;
+    justify-content:center;
+    align-items:center;
+    font-size:2rem;
+    z-index:9999;
+">
+    Signing you in...
+</div>
+
+<script src="../Scripts/signIn.js"></script>
+
+</body>
+</html>
